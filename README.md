@@ -17,3 +17,6 @@ Follow these steps to set up and run the frontend application:
 4. Run the development server: `npm run test`
 
 The development server will start on port 5173 by default and will automatically open the application in your default web browser.
+
+https://github.com/user-attachments/assets/cde92cac-4efe-4853-97fd-e03a46585ead
+
