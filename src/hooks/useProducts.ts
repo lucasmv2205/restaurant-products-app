@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { AxiosError } from 'axios';
 import { api } from '../services/api';
 
 interface Product {
@@ -36,28 +36,44 @@ const useProducts = (initialFilters: Filters) => {
       const response = await api.get(`/products?${params.toString()}`);
       setProducts(response.data);
     } catch (error) {
-      console.error('Error fetching products:', error.response?.data || error.message);
+      const err = error as AxiosError;
+      console.error("Error fetching products:", err.response?.data || err.message);
     }
   };
 
-  const addProduct = (newProduct: NewProduct) => {
-    api.post('/products', newProduct)
-      .then(response => {
-        setProducts([...products, response.data]);
-      })
-      .catch(error => {
-        console.error('There was an error adding the product!', error);
-      });
+  const addProduct = async (newProduct: NewProduct) => {
+    try {
+      const response = await api.post('/products', newProduct);
+      setProducts([...products, response.data]);
+      return response.data;
+    } catch (error) {
+      console.error('There was an error adding the product!', error);
+      throw error;
+    }
   };
 
-  const deleteProduct = (id: number) => {
-    api.delete(`/products/${id}`)
-      .then(() => {
-        setProducts(products.filter(product => product.id !== id));
-      })
-      .catch(error => {
-        console.error('There was an error deleting the product!', error);
-      });
+  const deleteProduct = async (id: number) => {
+    try {
+      const response = await api.delete(`/products/${id}`);
+      setProducts(products.filter(product => product.id !== id));
+      return response;
+    } catch (error) {
+      console.error('There was an error deleting the product!', error);
+      throw error;
+    }
+  };
+
+  const updateProduct = async (id: number, updatedProduct: Partial<NewProduct>) => {
+    try {
+      const response = await api.put(`/products/${id}`, updatedProduct);
+      setProducts(products.map(product =>
+        product.id === id ? { ...product, ...response.data } : product
+      ));
+      return response.data;
+    } catch (error) {
+      console.error('There was an error updating the product!', error);
+      throw error;
+    }
   };
 
   return {
@@ -66,6 +82,7 @@ const useProducts = (initialFilters: Filters) => {
     setFilters,
     addProduct,
     deleteProduct,
+    updateProduct,
   };
 };
 
