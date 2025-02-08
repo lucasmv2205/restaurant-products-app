@@ -27,11 +27,13 @@ const FilterSortForm: React.FC<FilterSortFormProps> = ({
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      handleFilterChange({ target: { name: "search", value: searchTerm } });
+      if (searchTerm !== filter.search) {
+        handleFilterChange({ target: { name: "search", value: searchTerm } });
+      }
     }, 500);
 
     return () => clearTimeout(handler);
-  }, [searchTerm, handleFilterChange]);
+  }, [searchTerm, filter.search]);
 
   return (
     <Box
