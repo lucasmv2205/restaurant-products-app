@@ -1,4 +1,4 @@
-# Product manager coding task - Frontend 
+## Description
 
 This is the frontend application for managing restaurant products. It is built with React and Typescript and uses Material UI for the UI components.
 
