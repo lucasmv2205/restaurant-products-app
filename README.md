@@ -14,5 +14,6 @@ Follow these steps to set up and run the frontend application:
 1. Navigate to the frontend directory: `cd frontend`
 2. Install dependencies: `npm install`
 3. Run the development server: `npm start`
+4. Run the development server: `npm run test`
 
 The development server will start on port 5173 by default and will automatically open the application in your default web browser.
