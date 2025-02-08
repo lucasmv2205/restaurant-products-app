@@ -21,7 +21,7 @@ const ListProductsPage: React.FC = () => {
         filter={filters}
         handleFilterChange={handleFilterChange}
       />
-      <ProductTable products={products} handleDeleteProduct={() => {}} />
+      <ProductTable products={products} />
     </Container>
   );
 };
