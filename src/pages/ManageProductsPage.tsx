@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Container, Modal, Box, Typography } from "@mui/material";
 import ProductForm from "../components/ProductForm";
 import ProductTable from "../components/ProductTable";
 import useProducts from "../hooks/useProducts";
@@ -108,7 +107,7 @@ const ManageProductsPage: React.FC = () => {
   };
 
   return (
-    <Container>
+    <>
       <ProductForm
         newProduct={newProduct}
         handleInputChange={handleInputChange}
@@ -142,7 +141,7 @@ const ManageProductsPage: React.FC = () => {
         product={selectedProduct}
         onSave={handleSaveProductChanges}
       />
-    </Container>
+    </>
   );
 };
 

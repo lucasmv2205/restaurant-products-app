@@ -43,6 +43,7 @@ const FilterSortForm: React.FC<FilterSortFormProps> = ({
         padding: "16px",
         borderRadius: "8px",
         display: "flex",
+        flexWrap: "wrap",
         flexDirection: { xs: "row", sm: "column" },
         gap: 2,
         alignItems: "flex-start",
